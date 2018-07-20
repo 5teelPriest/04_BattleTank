@@ -38,5 +38,6 @@ private:
 
 	//Finds in-world location of crosshair and checks if it's hitting something
 	bool GetSightRayHitLocation(FVector &OutHitLocation) const;
-	
+
+	FVector GetLookDirection(FVector2D ScreenCoordinates) const;
 };

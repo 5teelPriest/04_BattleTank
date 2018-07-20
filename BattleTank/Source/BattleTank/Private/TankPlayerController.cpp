@@ -41,25 +41,28 @@ void ATankPlayerController::AimAtCrosshair()
 
 bool ATankPlayerController::GetSightRayHitLocation(FVector &OutHitLocation) const
 {
-	//Find in-world location of crosshair in pixel coordinates
 	int32 ViewportSizeX, ViewportSizeY;
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
 	FVector2D ScreenPosition = FVector2D(ViewportSizeX * CrosshairXLocation, ViewportSizeY * CrosshairYLocation);
-	
-	//Draw trace line to that location
-	FVector CameraWorldLocation;
-	FVector CrosshairDirection;
-	DeprojectScreenPositionToWorld
-	(
-		ScreenPosition.X,
-		ScreenPosition.Y,
-		CameraWorldLocation,
-		CrosshairDirection
-	);
-	UE_LOG(LogTemp, Warning, TEXT("Crosshair Direction: %s"), *CrosshairDirection.ToString())
 
-	//Determine if it's hitting anything
-	
+	FVector LookDirection = GetLookDirection(ScreenPosition);
+	UE_LOG(LogTemp, Warning, TEXT("Look Direction: %s"), *LookDirection.ToString())
 
 	return true;
+}
+
+FVector ATankPlayerController::GetLookDirection(FVector2D ScreenCoordinates) const
+{
+	FVector CameraWorldPosition;
+	FVector LookDirection;
+
+	DeprojectScreenPositionToWorld
+	(
+		ScreenCoordinates.X,
+		ScreenCoordinates.Y,
+		CameraWorldPosition,
+		LookDirection
+	);
+
+	return LookDirection;
 }
