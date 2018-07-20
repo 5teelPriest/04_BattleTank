@@ -10,11 +10,7 @@ void ATankPlayerController::BeginPlay()
 
 	if (!PlayerTank)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("No Player Tank found!"))
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Controlled Tank: %s"), *PlayerTank->GetName())
+		UE_LOG(LogTemp, Warning, TEXT("Player controller not possessing tank!"))
 	}
 }
 
