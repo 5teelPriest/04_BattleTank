@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankPlayerController.h"
+#include "Engine/World.h"
 
 //This section executes once when the game is started
 void ATankPlayerController::BeginPlay()
@@ -31,7 +32,7 @@ void ATankPlayerController::AimAtCrosshair()
 	FVector HitLocation;
 	if (GetSightRayHitLocation(HitLocation))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Target Location: %s"), *HitLocation.ToString())
+		//UE_LOG(LogTemp, Warning, TEXT("Target Location: %s"), *HitLocation.ToString())
 		//TODO Tell controlled tank to aim at this point
 	}
 
@@ -46,7 +47,19 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector &OutHitLocation) cons
 	FVector2D ScreenPosition = FVector2D(ViewportSizeX * CrosshairXLocation, ViewportSizeY * CrosshairYLocation);
 	
 	//Draw trace line to that location
+	FVector CameraWorldLocation;
+	FVector CrosshairDirection;
+	DeprojectScreenPositionToWorld
+	(
+		ScreenPosition.X,
+		ScreenPosition.Y,
+		CameraWorldLocation,
+		CrosshairDirection
+	);
+	UE_LOG(LogTemp, Warning, TEXT("Crosshair Direction: %s"), *CrosshairDirection.ToString())
+
 	//Determine if it's hitting anything
+	
 
 	return true;
 }
