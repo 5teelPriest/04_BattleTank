@@ -40,9 +40,11 @@ void ATankPlayerController::AimAtCrosshair()
 
 bool ATankPlayerController::GetSightRayHitLocation(FVector &OutHitLocation) const
 {
-	OutHitLocation = FVector(1.0, 1.0, 1.0);
-	//Find in-world location of crosshair
-
+	//Find in-world location of crosshair in pixel coordinates
+	int32 ViewportSizeX, ViewportSizeY;
+	GetViewportSize(ViewportSizeX, ViewportSizeY);
+	FVector2D ScreenPosition = FVector2D(ViewportSizeX * CrosshairXLocation, ViewportSizeY * CrosshairYLocation);
+	
 	//Draw trace line to that location
 	//Determine if it's hitting anything
 

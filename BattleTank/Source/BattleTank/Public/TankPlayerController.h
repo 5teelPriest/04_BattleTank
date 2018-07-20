@@ -27,6 +27,12 @@ public:
 
 private:
 
+	UPROPERTY(EditAnywhere, Category = "Crosshair Location")
+		float CrosshairXLocation = 0.5f;
+
+	UPROPERTY(EditAnywhere, Category = "Crosshair Location")
+		float CrosshairYLocation = 0.33333f;
+
 	//Moves barrel to aim towards the on-screen crosshair
 	void AimAtCrosshair();
 
