@@ -30,6 +30,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 		void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
 
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+		void SetTurretReference(UStaticMeshComponent* TurretToSet);
+
 	//Aims turrent at tank's target
 	void AimAt(FVector HitLocation);
 

@@ -52,3 +52,9 @@ void ATank::SetBarrelReference(UStaticMeshComponent * BarrelToSet)
 	return;
 }
 
+void ATank::SetTurretReference(UStaticMeshComponent * TurretToSet)
+{
+	TankAimingComponent->SetBarrelReference(TurretToSet);
+
+	return;
+}
