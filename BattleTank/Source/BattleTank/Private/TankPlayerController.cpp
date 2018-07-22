@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "Camera/PlayerCameraManager.h"
 #include "TankPlayerController.h"
 #include "Engine/World.h"
+#include "Camera/PlayerCameraManager.h"
 
 //This section executes once when the game is started
 void ATankPlayerController::BeginPlay()
@@ -33,27 +33,25 @@ void ATankPlayerController::AimAtCrosshair()
 	FVector HitLocation;
 	if (GetSightRayHitLocation(HitLocation))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Target Location: %s"), *HitLocation.ToString())
+		GetControlledTank()->AimAt(HitLocation);
 		//TODO Tell controlled tank to aim at this point
 	}
 
 	return;
 }
 
-bool ATankPlayerController::GetSightRayHitLocation(FVector &OutHitLocation)
+bool ATankPlayerController::GetSightRayHitLocation(FVector &OutHitLocation) const
 {
 	int32 ViewportSizeX, ViewportSizeY;
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
 	FVector2D ScreenPosition = FVector2D(ViewportSizeX * CrosshairXLocation, ViewportSizeY * CrosshairYLocation);
-
 	FVector LookDirection = GetLookDirection(ScreenPosition);
 	OutHitLocation = GetLookVectorHitLocation(LookDirection);
-	//UE_LOG(LogTemp, Warning, TEXT("Look Direction: %s"), *LookDirection.ToString())
 
 	return true;
 }
 
-FVector ATankPlayerController::GetLookDirection(FVector2D ScreenCoordinates)
+FVector ATankPlayerController::GetLookDirection(FVector2D ScreenCoordinates) const
 {
 	FVector CameraWorldPosition;
 	FVector LookDirection;
@@ -69,7 +67,7 @@ FVector ATankPlayerController::GetLookDirection(FVector2D ScreenCoordinates)
 	return LookDirection;
 }
 
-FVector ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection)
+FVector ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection) const
 {
 	FHitResult HitResult;
 	FVector StartLocation = PlayerCameraManager->GetCameraLocation();

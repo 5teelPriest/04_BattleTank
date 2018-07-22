@@ -37,12 +37,12 @@ private:
 	void AimAtCrosshair();
 
 	//Finds in-world location of crosshair and checks if it's hitting something
-	bool GetSightRayHitLocation(FVector &OutHitLocation);
+	bool GetSightRayHitLocation(FVector &OutHitLocation) const;
 
-	FVector GetLookDirection(FVector2D ScreenCoordinates);
+	FVector GetLookDirection(FVector2D ScreenCoordinates) const;
 
 	UPROPERTY(EditAnywhere)
 		float LineTraceRange = 1000000.f;
 
-	FVector GetLookVectorHitLocation(FVector LookDirection);
+	FVector GetLookVectorHitLocation(FVector LookDirection) const;
 };

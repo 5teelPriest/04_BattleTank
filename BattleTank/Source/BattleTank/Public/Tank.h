@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-
+#include "TankAimingComponent.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
@@ -16,16 +16,28 @@ public:
 	ATank();
 
 protected:
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UTankAimingComponent* TankAimingComponent = nullptr;
+
+public:	
+
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+		void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
+
+	//Aims turrent at tank's target
+	void AimAt(FVector HitLocation);
+
+private:
+
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
 	
-	
+	UPROPERTY(EditAnywhere, Category = "Firing")
+		float LaunchSpeed = 100000.0f;
 };
