@@ -27,10 +27,10 @@ public:
 
 private:
 
-	UPROPERTY(EditAnywhere, Category = "Crosshair Location")
+	UPROPERTY(EditDefaultsOnly, Category = "Crosshair Location")
 		float CrosshairXLocation = 0.5f;
 
-	UPROPERTY(EditAnywhere, Category = "Crosshair Location")
+	UPROPERTY(EditDefaultsOnly, Category = "Crosshair Location")
 		float CrosshairYLocation = 0.33333f;
 
 	//Moves barrel to aim towards the on-screen crosshair
@@ -41,7 +41,7 @@ private:
 
 	FVector GetLookDirection(FVector2D ScreenCoordinates) const;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 		float LineTraceRange = 1000000.f;
 
 	bool GetLookVectorHitLocation(FVector LookDirection, FVector& OutHitLocation) const;
