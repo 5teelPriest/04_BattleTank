@@ -59,7 +59,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	FRotator AimRotation = AimDirection.ToOrientationRotator();
 	FRotator DeltaRotation = AimRotation - BarrelRotation;
 	
-	Barrel->Elevate();
+	Barrel->Elevate(DeltaRotation.Pitch);
 
 	return;
 }

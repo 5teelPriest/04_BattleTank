@@ -46,9 +46,13 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector &OutHitLocation) cons
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
 	FVector2D ScreenPosition = FVector2D(ViewportSizeX * CrosshairXLocation, ViewportSizeY * CrosshairYLocation);
 	FVector LookDirection = GetLookDirection(ScreenPosition);
-	OutHitLocation = GetLookVectorHitLocation(LookDirection);
-
-	return true;
+	bool bHaveHit = GetLookVectorHitLocation(LookDirection, OutHitLocation);
+	if (bHaveHit)
+	{
+		return true;
+	}
+	
+	return false;
 }
 
 FVector ATankPlayerController::GetLookDirection(FVector2D ScreenCoordinates) const
@@ -63,22 +67,28 @@ FVector ATankPlayerController::GetLookDirection(FVector2D ScreenCoordinates) con
 		CameraWorldPosition,
 		LookDirection
 	);
-
+	
 	return LookDirection;
 }
 
-FVector ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection) const
+bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVector& OutHitLocation) const
 {
 	FHitResult HitResult;
 	FVector StartLocation = PlayerCameraManager->GetCameraLocation();
 	FVector EndLocation = StartLocation + (LookDirection * LineTraceRange);
-	GetWorld()->LineTraceSingleByChannel
-	(
-		HitResult,
-		StartLocation,
-		EndLocation,
-		ECollisionChannel::ECC_Visibility
-	);
-	
-	return HitResult.Location;
+	bool bHaveHit = GetWorld()->LineTraceSingleByChannel
+		(
+			HitResult,
+			StartLocation,
+			EndLocation,
+			ECollisionChannel::ECC_Visibility
+		);
+	if (bHaveHit)
+	{
+		OutHitLocation = HitResult.Location;
+		return true;
+	}
+	OutHitLocation = FVector(0);
+
+	return false;
 }

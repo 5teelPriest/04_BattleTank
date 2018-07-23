@@ -44,5 +44,5 @@ private:
 	UPROPERTY(EditAnywhere)
 		float LineTraceRange = 1000000.f;
 
-	FVector GetLookVectorHitLocation(FVector LookDirection) const;
+	bool GetLookVectorHitLocation(FVector LookDirection, FVector& OutHitLocation) const;
 };
