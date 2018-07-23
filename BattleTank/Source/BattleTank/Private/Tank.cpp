@@ -44,15 +44,15 @@ void ATank::AimAt(FVector HitLocation)
 void ATank::Fire()
 {
 	FVector SpawnLocation = Barrel->GetSocketLocation(FName("Projectile"));
-	FRotator SpawnRotation = Barrel->RelativeRotation;
+	FRotator SpawnRotation = Barrel->GetSocketRotation(FName("Projectile"));
 	
-	GetWorld()->SpawnActor<AProjectile>
-		(
-			ProjectileBlueprint,
-			SpawnLocation,
-			SpawnRotation
+	AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>
+			(
+				ProjectileBlueprint,
+				SpawnLocation,
+				SpawnRotation
 			);
-	UE_LOG(LogTemp, Warning, TEXT("Tank firing"))
+	Projectile->LaunchProjectile(LaunchSpeed);
 
 	return;
 }
