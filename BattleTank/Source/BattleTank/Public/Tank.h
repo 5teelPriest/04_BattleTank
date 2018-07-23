@@ -37,6 +37,9 @@ public:
 	//Aims turrent at tank's target
 	void AimAt(FVector HitLocation);
 
+	UFUNCTION(BlueprintCallable, Category = "Projectile")
+		void Fire();
+
 private:
 
 	// Called to bind functionality to input
