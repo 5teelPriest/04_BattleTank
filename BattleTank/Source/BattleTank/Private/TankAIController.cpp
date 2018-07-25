@@ -9,7 +9,7 @@ void ATankAIController::Tick(float DeltaTime)
 
 	Cast<ATank>(GetPawn())->AimAt(GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation());
 
-	Cast<ATank>(GetPawn())->Fire();
+	//Cast<ATank>(GetPawn())->Fire();
 
 	return;
 }
