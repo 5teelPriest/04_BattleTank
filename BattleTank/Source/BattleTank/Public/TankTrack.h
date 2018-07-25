@@ -19,6 +19,6 @@ public:
 	
 private:
 
-	float MaxTrackDrivingForce = 130000000.0f; //Assuming 65 ton tank that can accelerate from 0 to 45 mph in 5 seconds
+	float MaxTrackDrivingForce = 260000000.0f; //Assuming 65 ton tank that can accelerate from 0 to 45 mph in 5 seconds
 
 };
