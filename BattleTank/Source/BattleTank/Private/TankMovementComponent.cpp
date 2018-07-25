@@ -2,9 +2,9 @@
 
 #include "TankMovementComponent.h"
 
-void IntendMoveForward(float Throw)
+void UTankMovementComponent::IntendForward(float Throw)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Intend Move Foward, Throw: %.2f"), Throw)
+	UE_LOG(LogTemp, Warning, TEXT("Intend move forwrd throw: %.2f"), Throw)
 
 	return;
 }

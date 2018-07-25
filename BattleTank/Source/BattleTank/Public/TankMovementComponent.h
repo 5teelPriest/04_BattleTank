@@ -16,6 +16,7 @@ class BATTLETANK_API UTankMovementComponent : public UNavMovementComponent
 	
 public:
 
-	void IntendMoveForward(float Throw);
+	UFUNCTION(BlueprintCallable, Category = "Input")
+		void IntendForward(float Throw);
 	
 };
