@@ -1,12 +1,29 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankMovementComponent.h"
+#include "TankTrack.h"
 
-void UTankMovementComponent::IntendForward(float Throw)
+void UTankMovementComponent::Initialize(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Intend move forwrd throw: %.2f"), Throw)
+	if (!LeftTrackToSet || !RightTrackToSet) { return; }
+	LeftTrack = LeftTrackToSet;
+	RightTrack = RightTrackToSet;
 
 	return;
 }
 
+void UTankMovementComponent::IntendForward(float Throw)
+{
+	LeftTrack->SetThrottle(Throw);
+	RightTrack->SetThrottle(Throw);
 
+	return;
+}
+
+void UTankMovementComponent::IntendRight(float Throw)
+{
+	LeftTrack->SetThrottle(Throw);
+	RightTrack->SetThrottle(-Throw);
+
+	return;
+}
