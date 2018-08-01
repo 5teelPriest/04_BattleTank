@@ -22,5 +22,5 @@ protected:
 private:
 
 	//How close AI moves to player before stopping
-	float AcceptanceRadius = 10000.0f;
+	float AcceptanceRadius = 1000.0f;
 };

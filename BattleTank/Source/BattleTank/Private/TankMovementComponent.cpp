@@ -34,8 +34,11 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 {
 	FVector AITankForwardVector = GetOwner()->GetActorForwardVector().GetSafeNormal();
 	FVector AITankForwardIntendVector = MoveVelocity.GetSafeNormal();
-	float AITankThrow = FVector::DotProduct(AITankForwardVector, AITankForwardIntendVector);
-	IntendForward(AITankThrow);
+
+	float AITankForwardThrow = FVector::DotProduct(AITankForwardVector, AITankForwardIntendVector);
+	IntendForward(AITankForwardThrow);
+	float AITankRightThrow = FVector::CrossProduct(AITankForwardVector, AITankForwardIntendVector).Z;
+	IntendRight(AITankRightThrow);
 	//UE_LOG(LogTemp, Warning, TEXT("%s velocity: %s"), *GetOwner()->GetName(), *MoveVelocity.GetSafeNormal().ToString())
 
 	return;
