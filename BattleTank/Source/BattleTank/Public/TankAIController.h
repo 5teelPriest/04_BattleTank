@@ -19,4 +19,8 @@ protected:
 
 	virtual void Tick(float DeltaTime) override;
 
+private:
+
+	//How close AI moves to player before stopping
+	float AcceptanceRadius = 10000.0f;
 };
