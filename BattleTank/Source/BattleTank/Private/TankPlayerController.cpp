@@ -1,6 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankPlayerController.h"
+#include "Tank.h"
+#include "TankAimingComponent.h"
 #include "Engine/World.h"
 #include "Camera/PlayerCameraManager.h"
 
@@ -8,6 +10,12 @@
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
+
+	UTankAimingComponent* TankAimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+	if (TankAimingComponent)
+	{
+		FoundAimingComponent(TankAimingComponent);
+	}
 
 	return;
 }
