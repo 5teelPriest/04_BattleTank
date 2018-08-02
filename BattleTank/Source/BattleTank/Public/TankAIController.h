@@ -2,10 +2,11 @@
 
 #pragma once
 
-#include "Tank.h"
 #include "CoreMinimal.h"
 #include "AIController.h"
 #include "TankAIController.generated.h"
+
+class UTankAimingComponent;
 
 //Logic that controls behavior of AI tanks on the battlefield
 UCLASS()
@@ -15,9 +16,13 @@ class BATTLETANK_API ATankAIController : public AAIController
 	
 protected:
 
+	virtual void BeginPlay() override;
+
 	virtual void Tick(float DeltaTime) override;
 
 private:
+
+	UTankAimingComponent * TankAimingComponent = nullptr;
 
 	//How close AI moves to player before stopping
 	float AcceptanceRadius = 1000.0f;

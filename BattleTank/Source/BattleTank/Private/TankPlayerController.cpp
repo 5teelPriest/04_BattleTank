@@ -1,7 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankPlayerController.h"
-#include "Tank.h"
 #include "TankAimingComponent.h"
 #include "Engine/World.h"
 #include "Camera/PlayerCameraManager.h"
@@ -11,7 +10,7 @@ void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	UTankAimingComponent* TankAimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+	TankAimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 	if (TankAimingComponent)
 	{
 		FoundAimingComponent(TankAimingComponent);
@@ -30,14 +29,12 @@ void ATankPlayerController::Tick(float DeltaTime)
 	return;
 }
 
-ATank* ATankPlayerController::GetControlledTank() const { return Cast<ATank>(GetPawn()); }
-
 void ATankPlayerController::AimAtCrosshair()
 {
 	FVector HitLocation;
 	if (GetSightRayHitLocation(HitLocation))
 	{
-		GetControlledTank()->AimAt(HitLocation);
+		TankAimingComponent->AimAt(HitLocation);
 	}
 
 	return;

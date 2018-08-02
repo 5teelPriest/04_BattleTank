@@ -6,7 +6,6 @@
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h"
 
-class ATank;
 class UTankAimingComponent;
 
 UCLASS()
@@ -25,13 +24,9 @@ protected:
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 		void FoundAimingComponent(UTankAimingComponent* AimingCompReference);
 
-public:
-
-	//Ensures player controller is possessing a tank pawn
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	ATank* GetControlledTank() const;
-
 private:
+
+	UTankAimingComponent * TankAimingComponent = nullptr;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Crosshair Location")
 		float CrosshairXLocation = 0.5f;
