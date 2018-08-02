@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Fisher-Studios 2018
 
 #pragma once
 
@@ -8,8 +8,8 @@
 
 class UTankTrack;
 
-/**
- * 
+/* This component handles movement of all AI or player controlled
+ * tanks in the level
  */
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BATTLETANK_API UTankMovementComponent : public UNavMovementComponent
@@ -17,7 +17,7 @@ class BATTLETANK_API UTankMovementComponent : public UNavMovementComponent
 	GENERATED_BODY()
 	
 public:
-
+	
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 		void Initialize(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet);
 
@@ -32,7 +32,5 @@ public:
 private:
 
 	UTankTrack * LeftTrack = nullptr;
-
 	UTankTrack* RightTrack = nullptr;
-
 };

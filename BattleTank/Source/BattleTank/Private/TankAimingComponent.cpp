@@ -18,6 +18,7 @@ UTankAimingComponent::UTankAimingComponent()
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
 	FVector OutLaunchVelocity = FVector(0);
+	if (!Barrel) { return; }
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
 	bool bHaveAimSolution = UGameplayStatics::SuggestProjectileVelocity
 	(
@@ -40,15 +41,10 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	return;
 }
 
-void UTankAimingComponent::SetBarrelReference(UTankBarrel * BarrelToSet)
+void UTankAimingComponent::Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet)
 {
+	if (!BarrelToSet || !TurretToSet) { return; }
 	Barrel = BarrelToSet;
-	
-	return;
-}
-
-void UTankAimingComponent::SetTurretReference(UTankTurret * TurretToSet)
-{
 	Turret = TurretToSet;
 
 	return;
@@ -56,10 +52,10 @@ void UTankAimingComponent::SetTurretReference(UTankTurret * TurretToSet)
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
+	if (!Barrel || !Turret) { return; }
 	FRotator BarrelRotation = Barrel->GetForwardVector().ToOrientationRotator();
 	FRotator AimRotation = AimDirection.ToOrientationRotator();
 	FRotator DeltaRotation = AimRotation - BarrelRotation;
-	
 	Barrel->Elevate(DeltaRotation.Pitch);
 	Turret->Rotate(DeltaRotation.Yaw);
 

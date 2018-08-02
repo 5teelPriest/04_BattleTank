@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Fisher-Studios 2018
 
 #pragma once
 
@@ -7,9 +7,7 @@
 #include "AIController.h"
 #include "TankAIController.generated.h"
 
-/**
- * 
- */
+//Logic that controls behavior of AI tanks on the battlefield
 UCLASS()
 class BATTLETANK_API ATankAIController : public AAIController
 {

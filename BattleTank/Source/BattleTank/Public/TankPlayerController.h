@@ -23,6 +23,7 @@ protected:
 public:
 
 	//Ensures player controller is possessing a tank pawn
+	UFUNCTION(BlueprintCallable, Category = "Setup")
 	ATank* GetControlledTank() const;
 
 private:

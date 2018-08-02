@@ -6,6 +6,15 @@
 #include "Components/ActorComponent.h"
 #include "TankAimingComponent.generated.h"
 
+//Enum for firing state to determine crosshair color
+UENUM()
+enum class EFiringStatus : uint8
+{
+	LOCKED,
+	AIMING,
+	RELOADING
+};
+
 class UTankBarrel;
 class UTankTurret;
 
@@ -20,15 +29,20 @@ public:
 
 	void AimAt(FVector HitLocation, float LaunchSpeed);
 
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
-
-	void SetTurretReference(UTankTurret* TurretToSet);
-	
-private:
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+		void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
 	UTankBarrel* Barrel = nullptr;
+
+protected:
+
+	UPROPERTY(BlueprintReadOnly, Category = "State")
+		EFiringStatus FiringStatus = EFiringStatus::RELOADING;
+	
+private:
 
 	UTankTurret* Turret = nullptr;
 
 	void MoveBarrelTowards(FVector AimDirection);
+
 };
