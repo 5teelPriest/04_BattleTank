@@ -10,8 +10,3 @@ ATank::ATank()
 
 	return;
 }
-
-void ATank::BeginPlay()
-{
-	Super::BeginPlay();
-}
