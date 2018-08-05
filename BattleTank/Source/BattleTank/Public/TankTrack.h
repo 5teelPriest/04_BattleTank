@@ -18,6 +18,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Input")
 		void SetThrottle(float Throttle);
+
+	void DriveTrack();
 	
 private:
 	
@@ -28,6 +30,8 @@ private:
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 
 	float MaxTrackDrivingForce = 140000000.0f; //Assuming 65 ton tank that can accelerate from 0 to 45 mph in 5 seconds
+
+	float CurrentThrottle = 0.0f;
 
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent,

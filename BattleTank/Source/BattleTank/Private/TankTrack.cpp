@@ -22,7 +22,8 @@ void UTankTrack::BeginPlay()
 
 void UTankTrack::OnHit(UPrimitiveComponent * HitComponent, AActor * OtherActor, UPrimitiveComponent * OtherComponent, FVector NormalImpulse, const FHitResult & Hit)
 {
-	UE_LOG(LogTemp, Warning, TEXT("On Ground"))
+	DriveTrack();
+	CurrentThrottle = 0.0f;
 
 	return;
 }
@@ -43,12 +44,17 @@ void UTankTrack::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompo
 
 void UTankTrack::SetThrottle(float Throttle)
 {
+	CurrentThrottle = FMath::Clamp<float>(CurrentThrottle + Throttle, -1.0f, 1.0f);
+
+	return;
+}
+
+void UTankTrack::DriveTrack()
+{
 	if (!ensure(TankRoot)) { return; }
-	Throttle = FMath::Clamp<float>(Throttle, -1.0f, 1.0f);
-	FVector ForceApplied = GetForwardVector() * Throttle * MaxTrackDrivingForce;
+	FVector ForceApplied = GetForwardVector() * CurrentThrottle * MaxTrackDrivingForce;
 	FVector ForceLocation = GetComponentLocation();
 	TankRoot->AddForceAtLocation(ForceApplied, ForceLocation, NAME_None);
-
 	return;
 }
 
