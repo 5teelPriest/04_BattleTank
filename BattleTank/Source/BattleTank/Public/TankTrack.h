@@ -29,4 +29,7 @@ private:
 
 	float MaxTrackDrivingForce = 140000000.0f; //Assuming 65 ton tank that can accelerate from 0 to 45 mph in 5 seconds
 
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent,
+		FVector NormalImpulse, const FHitResult& Hit);
 };

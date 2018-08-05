@@ -15,6 +15,15 @@ void UTankTrack::BeginPlay()
 
 	TankRoot = Cast<UStaticMeshComponent>(GetOwner()->GetRootComponent());
 
+	OnComponentHit.AddDynamic(this, &UTankTrack::OnHit);
+
+	return;
+}
+
+void UTankTrack::OnHit(UPrimitiveComponent * HitComponent, AActor * OtherActor, UPrimitiveComponent * OtherComponent, FVector NormalImpulse, const FHitResult & Hit)
+{
+	UE_LOG(LogTemp, Warning, TEXT("On Ground"))
+
 	return;
 }
 
