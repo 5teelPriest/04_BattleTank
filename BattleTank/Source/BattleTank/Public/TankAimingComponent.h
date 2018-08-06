@@ -38,6 +38,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
 
+	EFiringStatus GetFiringStatus();
+
 protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "State")

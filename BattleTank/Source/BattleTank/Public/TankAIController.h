@@ -25,5 +25,6 @@ private:
 	UTankAimingComponent * TankAimingComponent = nullptr;
 
 	//How close AI moves to player before stopping
-	float AcceptanceRadius = 1000.0f;
+	UPROPERTY(EditDefaultsOnly)
+		float AcceptanceRadius = 8000.0f;
 };

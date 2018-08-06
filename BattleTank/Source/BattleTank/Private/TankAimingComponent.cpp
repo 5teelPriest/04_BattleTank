@@ -45,6 +45,11 @@ void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickTy
 	return;
 }
 
+EFiringStatus UTankAimingComponent::GetFiringStatus()
+{
+	return FiringStatus;
+}
+
 bool UTankAimingComponent::IsBarrelMoving(FVector AimDirection)
 {
 	if (AimDirection.Equals(Barrel->GetForwardVector()))
