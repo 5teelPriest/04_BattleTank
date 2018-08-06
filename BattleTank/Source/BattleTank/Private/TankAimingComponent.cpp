@@ -29,7 +29,11 @@ void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickTy
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	
-	if ((GetWorld()->GetTimeSeconds() - LastFireTime) < ReloadTimeInSeconds)
+	if (AmmoRemaining == 0)
+	{
+		FiringStatus = EFiringStatus::OUT_OF_AMMO;
+	}
+	else if ((GetWorld()->GetTimeSeconds() - LastFireTime) < ReloadTimeInSeconds)
 	{
 		FiringStatus = EFiringStatus::RELOADING;
 	}
@@ -116,7 +120,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 void UTankAimingComponent::Fire()
 {
 	if (!ensure(Barrel)) { return; }
-	if (FiringStatus != EFiringStatus::RELOADING)
+	if (!(FiringStatus == EFiringStatus::RELOADING || FiringStatus == EFiringStatus::OUT_OF_AMMO))
 	{
 		FVector SpawnLocation = Barrel->GetSocketLocation(FName("Projectile"));
 		FRotator SpawnRotation = Barrel->GetSocketRotation(FName("Projectile"));
@@ -128,6 +132,8 @@ void UTankAimingComponent::Fire()
 				);
 		Projectile->LaunchProjectile(LaunchSpeed);
 		LastFireTime = GetWorld()->GetTimeSeconds();
+		AmmoRemaining -= 1;
+		UE_LOG(LogTemp, Warning, TEXT("%d"), AmmoRemaining)
 	}
 
 	return;

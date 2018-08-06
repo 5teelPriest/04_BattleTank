@@ -12,7 +12,8 @@ enum class EFiringStatus : uint8
 {
 	LOCKED,
 	AIMING,
-	RELOADING
+	RELOADING,
+	OUT_OF_AMMO
 };
 
 class UTankBarrel;
@@ -39,6 +40,10 @@ public:
 	void Fire();
 
 	EFiringStatus GetFiringStatus();
+
+	UPROPERTY(BlueprintReadOnly)
+		uint8 AmmoRemaining = 3;
+
 
 protected:
 
