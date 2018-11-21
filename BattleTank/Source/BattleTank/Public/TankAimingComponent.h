@@ -41,9 +41,8 @@ public:
 
 	EFiringStatus GetFiringStatus();
 
-	UPROPERTY(BlueprintReadOnly)
-		uint8 AmmoRemaining = 3;
-
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = "Firing")
+		int32 AmmoRemaining = 3;
 
 protected:
 
@@ -63,7 +62,7 @@ private:
 	void MoveBarrelTowards(FVector AimDirection);
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-		float LaunchSpeed = 100000.0f;
+		float LaunchSpeed = 10000.0f;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 		TSubclassOf<AProjectile> ProjectileBlueprint;
