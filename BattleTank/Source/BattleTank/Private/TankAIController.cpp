@@ -26,6 +26,7 @@ void ATankAIController::Tick(float DeltaTime)
 	MoveToActor(PlayerTank, AcceptanceRadius);
 	if (TankAimingComponent->GetFiringStatus() == EFiringStatus::LOCKED)
 	{
+		UE_LOG(LogTemp, Warning, TEXT("Firing"))
 		TankAimingComponent->Fire();
 	}
 	

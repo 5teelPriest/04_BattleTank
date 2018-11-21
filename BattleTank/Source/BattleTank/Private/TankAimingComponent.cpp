@@ -133,7 +133,6 @@ void UTankAimingComponent::Fire()
 		Projectile->LaunchProjectile(LaunchSpeed);
 		LastFireTime = GetWorld()->GetTimeSeconds();
 		AmmoRemaining -= 1;
-		UE_LOG(LogTemp, Warning, TEXT("%d"), AmmoRemaining)
 	}
 
 	return;
