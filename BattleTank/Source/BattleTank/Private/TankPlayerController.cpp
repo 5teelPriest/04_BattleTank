@@ -4,6 +4,7 @@
 #include "TankAimingComponent.h"
 #include "Engine/World.h"
 #include "Camera/PlayerCameraManager.h"
+#include "Tank.h"
 
 //This section executes once when the game is started
 void ATankPlayerController::BeginPlay()
@@ -91,4 +92,23 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 	OutHitLocation = FVector(0);
 
 	return false;
+}
+
+void ATankPlayerController::SetPawn(APawn * InPawn)
+{
+	Super::SetPawn(InPawn);
+	if (InPawn)
+	{
+		auto PossessedTank = Cast<ATank>(InPawn);
+		if (!ensure(PossessedTank)) { return; }
+
+		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankPlayerController::OnTankDeath);
+	}
+}
+
+void ATankPlayerController::OnTankDeath()
+{
+	StartSpectatingOnly();
+
+	return;
 }
